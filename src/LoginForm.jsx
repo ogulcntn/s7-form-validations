@@ -30,6 +30,11 @@ export default function LoginForm() {
   const handleChange = (event) => {
     let { name, value, type } = event.target;
     value = type === "checkbox" ? event.target.checked : value;
+
+    if (name === "email") {
+      setErrors({ ...errors, email: !validateEmail(value) });
+    }
+
     setFormData({ ...formData, [name]: value });
   };
 
@@ -43,7 +48,10 @@ export default function LoginForm() {
       <h1>Kayıt ol</h1>
       <form onSubmit={handleSubmit}>
         {/* eğer email ile ilgili bir hata varsa label'a hasError class'ı ekle */}
-        <label className="form-input-line" data-testid="email-label">
+        <label
+          className={`form-input-line  ${errors.email ? "hasError" : ""}`}
+          data-testid="email-label"
+        >
           <span className="form-label">Email</span>
           <input
             className="form-input"
@@ -55,9 +63,11 @@ export default function LoginForm() {
           />
 
           {/* Email ile ilgili bir hata yoksa alttaki spani hiç gösterme */}
-          <span className="error-message" role="email-error">
-            {/* Email ile ilgili bir hata mesajı varsa burada görünmeli */}
-          </span>
+          {errors.email === true && (
+            <span className="error-message" role="email-error">
+              {errorMessages.email}
+            </span>
+          )}
         </label>
 
         {/* eğer password ile ilgili bir hata varsa label'a hasError class'ı ekle */}
