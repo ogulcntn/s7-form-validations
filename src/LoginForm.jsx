@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // bu fonksiyon, parametre olarak aldığı email geçerliyse true, değilse false döner
 function validateEmail(email) {
@@ -48,7 +48,14 @@ export default function LoginForm() {
     event.preventDefault();
     console.log(formData);
   }
-
+  useEffect(() => {
+    const noErrors = !errors.email && !errors.password && !errors.terms;
+    const allFilled =
+      formData.email.length > 0 &&
+      formData.password.length > 0 &&
+      formData.terms === true;
+    setIsValid(noErrors && allFilled);
+  }, [errors, formData]);
   return (
     <div className="form">
       <h1>Kayıt ol</h1>
@@ -88,7 +95,7 @@ export default function LoginForm() {
             onChange={handleChange}
             value={formData.password}
             data-testid="password"
-            type="text"
+            type="password"
           />
 
           {/* Password ile ilgili bir hata yoksa alttaki spani hiç gösterme */}
