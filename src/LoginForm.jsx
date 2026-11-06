@@ -37,6 +37,9 @@ export default function LoginForm() {
     if (name === "password") {
       setErrors({ ...errors, password: value.length < 4 });
     }
+    if (name === "terms") {
+      setErrors({ ...errors, terms: !event.target.checked });
+    }
 
     setFormData({ ...formData, [name]: value });
   };
@@ -97,7 +100,7 @@ export default function LoginForm() {
         </label>
 
         {/* eğer terms ile ilgili bir hata varsa label'a hasError class'ı ekle */}
-        <label className="form-ch-line">
+        <label className={`form-ch-line ${errors.terms ? "hasError" : ""}`}>
           <input
             type="checkbox"
             name="terms"
