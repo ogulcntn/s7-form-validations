@@ -1,5 +1,5 @@
 {
-  "stats": "8 passed, 5 failed out of 13",
+  "stats": "11 passed, 2 failed out of 13",
   "tests": [
     {
       "name": "Sayfa açıldığında Gönder butonu disabled mı?",
@@ -31,15 +31,15 @@
     },
     {
       "name": "Password yanlış doldurulunca hata mesajı görünüyor mu?",
-      "state": "fail"
+      "state": "pass"
     },
     {
       "name": "Password yanlış doldurulunca labelına hasError classı ekleniyor mu?",
-      "state": "fail"
+      "state": "pass"
     },
     {
       "name": "Password doğru doldurulunca hata mesajı ortadan kalkıyor mu?",
-      "state": "fail"
+      "state": "pass"
     },
     {
       "name": "Kullanım koşulları kabul edilmediğinde buton disabled kalmaya devam ediyor mu?",

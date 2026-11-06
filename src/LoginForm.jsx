@@ -34,6 +34,9 @@ export default function LoginForm() {
     if (name === "email") {
       setErrors({ ...errors, email: !validateEmail(value) });
     }
+    if (name === "password") {
+      setErrors({ ...errors, password: value.length < 4 });
+    }
 
     setFormData({ ...formData, [name]: value });
   };
@@ -71,7 +74,10 @@ export default function LoginForm() {
         </label>
 
         {/* eğer password ile ilgili bir hata varsa label'a hasError class'ı ekle */}
-        <label data-testid="password-label" className="form-input-line">
+        <label
+          data-testid="password-label"
+          className={`form-input-line ${errors.password ? "hasError" : ""}`}
+        >
           <span className="form-label">Şifre</span>
           <input
             className="form-input"
@@ -83,9 +89,11 @@ export default function LoginForm() {
           />
 
           {/* Password ile ilgili bir hata yoksa alttaki spani hiç gösterme */}
-          <span className="error-message" role="password-error">
-            {/* Password ile ilgili bir hata mesajı varsa burada görünmeli */}
-          </span>
+          {errors.password === true && (
+            <span className="error-message" role="password-error">
+              {errorMessages.password}
+            </span>
+          )}
         </label>
 
         {/* eğer terms ile ilgili bir hata varsa label'a hasError class'ı ekle */}
