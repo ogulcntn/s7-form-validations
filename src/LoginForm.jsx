@@ -24,6 +24,8 @@ const errorMessages = {
 
 export default function LoginForm() {
   const [formData, setFormData] = useState(initialForm);
+  const [errors, setErrors] = useState(initialErrors);
+  const [isValid, setIsValid] = useState(false);
 
   const handleChange = (event) => {
     let { name, value, type } = event.target;
@@ -89,7 +91,7 @@ export default function LoginForm() {
         </label>
 
         {/* formdaki hata durumuna göre bu button disabled olmalı ya da olmamalı */}
-        <button className="send-button" data-testid="send" disabled={false}>
+        <button className="send-button" data-testid="send" disabled={!isValid}>
           Gönder
         </button>
       </form>
